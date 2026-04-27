@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: analisis_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: analisis_app
+    depends_on:
+      - db
+    environment:
+      DATA_NILAI: 85,90,78,92,88
+      DB_HOST: db
+      DB_NAME: analisis_db
+      DB_USER: admin
+      DB_PASSWORD: admin123
+    volumes:
+      - ./output:/app/output
+    command: python app.py
+
+volumes:
+  postgres_data: 
