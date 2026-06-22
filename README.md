@@ -30,3 +30,75 @@ Tunggu proses selesai, nanti:
 Aplikasi akan otomatis berjalan
 Data akan diproses
 Hasil tersimpan ke file CSV dan database
+
+
+
+# Panduan Menjalankan UAS
+
+## Menjalankan Terraform
+
+Inisialisasi Terraform:
+
+```bash
+terraform init
+```
+
+Melihat rencana infrastruktur:
+
+```bash
+terraform plan
+```
+
+Membuat container Ubuntu:
+
+```bash
+terraform apply
+```
+
+Ketik:
+
+```text
+yes
+```
+
+Container yang akan dibuat:
+
+```text
+server_uas_analitik
+```
+
+## Menjalankan Ansible
+
+Jalankan perintah berikut:
+
+```bash
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+Playbook akan:
+
+- Melakukan update repository Ubuntu.
+- Menginstal Python3.
+- Menginstal Python3-pip.
+- Menginstal library Pandas.
+- Menggunakan opsi `--break-system-packages`.
+
+## Verifikasi
+
+Cek container yang berhasil dibuat:
+
+```bash
+docker ps
+```
+
+Output yang diharapkan:
+
+```text
+server_uas_analitik
+```
+
+## File UAS yang Ditambahkan
+
+- main.tf
+- inventory.ini
+- playbook.yml
