@@ -1,0 +1,16 @@
+---
+- name: Setup Server UAS Analitik
+  hosts: server
+  become: true
+
+  tasks:
+
+    - name: Update repository dan install Python
+      raw: |
+        apt-get update
+        apt-get install -y python3 python3-pip
+
+    - name: Install Pandas
+      pip:
+        name: pandas
+        extra_args: --break-system-packages
